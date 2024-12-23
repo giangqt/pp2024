@@ -1,79 +1,54 @@
-# Ask the user to input a number of unit (course / student)
-def input_something(args):
-    return int(input(f"Enter the number of {args} in this class: "));
+class Student:
+    def __init__(self, id, name, dob, marks={}):
+        self.id = id
+        self.name = name
+        self.dob = dob
+        self.marks = marks
 
-# Ask the user to enter a list of info for an type
-def input_infos(args):
-    item = {}
+class Course:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
 
-    # TODO: input info for the type (student/course info)
+# Input function
+def input_num_students():
+    while True:
+        try:
+            num_students = int(input("Enter the number of students: "))
+            return num_students
+        except ValueError:
+            print("Invalid input. Please enter a number.")
 
-    return item
+def input_student_info():
+    while True:
+        try:
+            id = int(input("Enter student ID: "))
+            name = input("Enter student name: ")
+            dob = input("Enter student DOB (YYYY-MM-DD): ")
+            return Student(id, name, dob)
+        except ValueError:
+            print("Invalid input. Please enter valid ID and date format (YYYY-MM-DD).")
 
-# Input the student mark in a course base on the course id
-def input_mark():
-
-    student["marks"] = {}
-    # TODO: check mark in student or not
-    # If not, enter the mark for the course
-
-
-# Display a list of students
-def list_students(students):
-
-    # TODO: check what happens if there's no student (hint: len(students))
-    print("There aren't any students yet")
-
-    # TODO: display the student list
-    print("Here is the student list: ")
-
-    # TODO: add loop function to check the info of student
-    print(f"{i+1}. {student['id']} - {student['name']} - {student['DoB']}")
-
-    # TODO: check if mark student and print out the information
-    if "marks" in student:
-        print("Marks (Course Id - Mark): ", end="")   
-
-# Display a list of courses
+# Listing functions
 def list_courses(courses):
-    # TODO: check what happens if there's no course (hint: len(course))
-    print("There aren't any courses yet")
-        
-    print("Here is the course list: ")
-    # TODO: add loop function to check the info of course
-    print(f"{i+1}. {course['id']} - {course['name']}")
+    for course in courses:
+        print(f"Course ID: {course.id}, Course Name: {course.name}")
 
-# Main function for the "game"
-def main():
-    # Initialize the list for DATA option
-    courses = []
-    students = []
-    num_students = 0
-    num_courses = 0
+def list_students(students):
+    for student in students:
+        print(f"Student ID: {student.id}, Name: {student.name}, DOB: {student.dob}")
 
-    while(True):
-        print("""
-    0. Exit
-    1. 
-    2. 
-    ...
-    n
-    """)
-        option = int(input("Your choice: "))                                                         # Choose option from 0 -> n
-        if option == 0:
-            break
-
-        elif option == 1:                                                                            # Option 1
-            input_something(student)
-        elif option == 2:                                                                            # Option 2                                                     
-            input_infos(course)
-        ... ... 
-
-        elif option == n:                                                                            # Option n
-            # last function (your choice)
+def show_student_marks(students, course_id):
+    for student in students:
+        if course_id in student.marks:
+            print(f"Student ID: {student.id}, Name: {student.name}, Marks: {student.marks[course_id]}")
         else:
-            print("Invalid input. Please try again!")
+            print(f"Student ID: {student.id}, Name: {student.name}, Course not found.")
 
-# Call the main function
+# Main function
+def main():
+    num_students = input_num_students()
+    students = [input_student_info() for _ in range(num_students)]
+
 if __name__ == "__main__":
     main()
